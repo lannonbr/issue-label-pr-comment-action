@@ -63,7 +63,7 @@ async function run() {
 
   let params = tools.context.repo({ number, body: commentBody });
 
-  await octokit.pullRequests.createComment(params);
+  await octokit.issues.createComment(params);
 }
 
 async function getCurrentLabels() {
