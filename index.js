@@ -36,7 +36,7 @@ async function run() {
     labelObj => labelObj.type === "delete"
   );
 
-  let commentBody = `Issue Label Manager: Changes Preview:\n\n`;
+  let commentBody = `# Issue Label Manager - Changes Preview\n\n`;
 
   commentBody += `Here's a preview of the changes that will happen when this PR is merged in`;
 
