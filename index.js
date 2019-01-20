@@ -68,7 +68,7 @@ async function run() {
     commentBody += `\n`;
   }
 
-  console.log(`If you're okay with these changes, merge away`);
+  commentBody += `If you're okay with these changes, merge away`;
 
   let number = tools.context.payload.pull_request.number;
 
