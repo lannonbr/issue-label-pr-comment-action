@@ -11,6 +11,11 @@ async function run() {
     "labels.json"
   );
 
+  // Continue only if the PR was just opened
+  if (tools.context.payload.action !== "opened") {
+    return;
+  }
+
   let liveLabels = await getCurrentLabels();
   let newLabels = JSON.parse(fs.readFileSync(newLabelsUrl).toString());
 
@@ -31,10 +36,12 @@ async function run() {
     labelObj => labelObj.type === "delete"
   );
 
-  let commentBody = `Here are some pending changes for the new change:\n\n`;
+  let commentBody = `Issue Label Manager: Changes Preview:\n\n`;
+
+  commentBody += `Here's a preview of the changes that will happen when this PR is merged in`;
 
   if (createLabels.length > 0) {
-    commentBody += `New Labels:\n`;
+    commentBody += `**New Labels**:\n`;
     for (let label of createLabels) {
       commentBody += `* ${label.label.name} (color: ${label.label.color}): ${
         label.label.description
@@ -44,16 +51,17 @@ async function run() {
   }
 
   if (updateLabels.length > 0) {
-    commentBody += `Updated Labels:\n\n`;
+    commentBody += `**Updated Labels**:\n\n`;
     for (let label of updateLabels) {
       commentBody += `* ${label.label.name} (color: ${label.label.color}): ${
         label.label.description
       }\n`;
     }
+    commentBody += `\n`;
   }
 
   if (deleteLabels.length > 0) {
-    commentBody += `Deleted Labels:\n\n`;
+    commentBody += `**Deleted Labels**:\n\n`;
     for (let label of deleteLabels) {
       commentBody += `* ${label.label.name}\n`;
     }
