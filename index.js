@@ -38,7 +38,7 @@ async function run() {
 
   let commentBody = `# Issue Label Manager - Changes Preview\n\n`;
 
-  commentBody += `Here's a preview of the changes that will happen when this PR is merged in`;
+  commentBody += `Here's a preview of the changes that will happen when this PR is merged in\n\n`;
 
   if (createLabels.length > 0) {
     commentBody += `**New Labels**:\n`;
@@ -65,7 +65,10 @@ async function run() {
     for (let label of deleteLabels) {
       commentBody += `* ${label.label.name}\n`;
     }
+    commentBody += `\n`;
   }
+
+  console.log(`If you're okay with these changes, merge away`);
 
   let number = tools.context.payload.pull_request.number;
 
