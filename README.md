@@ -13,8 +13,8 @@ When using this action in the repo, it will generate a comment in the PR as such
 ## Usage
 
 ```workflow
-action "lannonbr/issue-label-pr-comment-action@master" {
-  uses = "lannonbr/issue-label-pr-comment-action@master"
+action "Preview Issue Label Changes" {
+  uses = "lannonbr/issue-label-pr-comment-action@1.0.0"
   secrets = ["GITHUB_TOKEN"]
 }
 ```
